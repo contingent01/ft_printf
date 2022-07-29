@@ -6,77 +6,33 @@
 /*   By: mdkhissi <mdkhissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 19:19:56 by mdkhissi          #+#    #+#             */
-/*   Updated: 2022/07/29 15:44:22 by mdkhissi         ###   ########.fr       */
+/*   Updated: 2022/07/29 16:04:42 by mdkhissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "ft_printf.h"
 
-void	sign_0x(char **bigStr, long n, t_tags *tags, int r)
+int	append_text(char **s, const char *format, int *i, int count)
 {
-	char	*s;
+	int	from;
 
-	s = NULL;
-	if (tags->specifier == 'x' || tags->specifier == 'X'
-		|| tags->specifier == 'p')
-	{
-		s = s_0x(tags);
-		ft_strnallocat(bigStr, s, -1, r);
-		free(s);
-	}
-	if (tags->specifier == 'i' || tags->specifier == 'd')
-	{
-		s = s_sign(n, tags->sign);
-		ft_strnallocat(bigStr, s, -1, r);
-		free(s);
-	}
+	from = (*i)++;
+	while (format[*i] && format[*i] != '%')
+		(*i)++;
+	if (*i - from > 0)
+		ft_strnallocat(s, format + from, *i - from, 0);
+	count += *i - from;
+	return (count);
 }
 
-void	reinit_flags(t_tags *tags)
+void	print_s_fd(char **dest, char *s, int fd)
 {
-	tags->nil = 0;
-	tags->len = 0;
-	tags->specifier = '\0';
-	tags->sign = '\0';
-	tags->justify = '\0';
-	tags->zerow = false;
-	tags->width = -1;
-	tags->precision = -1;
-}
-
-char	*extract_var(char *param, va_list *vl, t_tags *tags)
-{
-	if (tags->specifier == 'd')
-		param = format_idu(va_arg(*vl, int), tags);
-	else if (tags->specifier == 'i')
-		param = format_idu(va_arg(*vl, int), tags);
-	else if (tags->specifier == 'u')
-		param = format_idu(va_arg(*vl, unsigned int), tags);
-	else if (tags->specifier == 'p')
-		param = format_p(va_arg(*vl, uintptr_t), tags);
-	else if (tags->specifier == 'c')
-		param = format_c((char) va_arg(*vl, int), tags);
-	else if (tags->specifier == 's')
-		param = format_s(va_arg(*vl, char *), tags);
-	else if (tags->specifier == 'x')
-		param = format_x(va_arg(*vl, unsigned int), tags);
-	else if (tags->specifier == 'X')
-		param = str_capitalize(format_x(va_arg(*vl, unsigned int), tags));
-	else if (tags->specifier == '%')
-		param = format_c('%', tags);
-	return (param);
-}
-
-char	*parse_param(const char *format, int *i, va_list *vl, t_tags *tags)
-{
-	char	*param;
-
-	param = NULL;
-	if (extract_tags(format, &(*i), vl, tags))
-		param = extract_var(param, vl, tags);
-	else
-		return (NULL);
-	return (param);
+	if (dest)
+		*dest = s;
+	if (fd >= 0)
+		ft_putstr_fd(s, fd);
+	if (!dest && fd == -1)
+		ft_putstr_fd(s, STDOUT_FILENO);
 }
 
 int	ft_printf(char **dest, int fd, const char *format, ...)
@@ -86,7 +42,6 @@ int	ft_printf(char **dest, int fd, const char *format, ...)
 	int		i;
 	int		count;
 	char	*s;
-	int		from;
 
 	s = NULL;
 	count = 0;
@@ -97,24 +52,13 @@ int	ft_printf(char **dest, int fd, const char *format, ...)
 		if (format[i] == '%')
 		{
 			reinit_flags(&tags);
-			ft_strnallocat(&s, parse_param(format, &i, &vl, &tags), tags.len, 0);
+			ft_strnallocat(&s,
+				parse_param(format, &i, &vl, &tags), tags.len, 0);
 			count += tags.len;
 		}
 		else
-		{
-			from = i++;
-			while (format[i] && format[i] != '%')
-				i++;
-			if (i - from > 0)
-				ft_strnallocat(&s, format + from, i - from, 0);
-			count += i - from;
-		}
+			count = append_text(&s, format, &i, count);
 	}
-	if (dest)
-		*dest = s;
-	if (fd >= 0)
-		ft_putstr_fd(s, fd);
-	if (!dest && fd == -1)
-		ft_putstr_fd(s, STDOUT_FILENO);
+	print_s_fd(dest, s, fd);
 	return (count);
 }

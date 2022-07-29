@@ -6,11 +6,11 @@
 /*   By: mdkhissi <mdkhissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 19:22:47 by mdkhissi          #+#    #+#             */
-/*   Updated: 2022/07/29 12:30:09 by mdkhissi         ###   ########.fr       */
+/*   Updated: 2022/07/29 15:56:14 by mdkhissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "ft_printf.h"
 
 void	s_precision(char **bigStr, t_tags *tags)
 {

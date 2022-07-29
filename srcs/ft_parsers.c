@@ -6,11 +6,11 @@
 /*   By: mdkhissi <mdkhissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 19:17:50 by mdkhissi          #+#    #+#             */
-/*   Updated: 2022/07/29 12:29:58 by mdkhissi         ###   ########.fr       */
+/*   Updated: 2022/07/29 15:56:01 by mdkhissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "ft_printf.h"
 
 void	extract_flags(const char *format, int *i, t_tags *tags)
 {

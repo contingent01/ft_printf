@@ -6,11 +6,11 @@
 /*   By: mdkhissi <mdkhissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 19:17:19 by mdkhissi          #+#    #+#             */
-/*   Updated: 2022/07/29 12:29:49 by mdkhissi         ###   ########.fr       */
+/*   Updated: 2022/07/29 15:55:50 by mdkhissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "ft_printf.h"
 
 char	*format_x(unsigned int n, t_tags *tags)
 {

@@ -6,7 +6,7 @@
 /*   By: mdkhissi <mdkhissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 19:23:31 by mdkhissi          #+#    #+#             */
-/*   Updated: 2022/07/29 14:57:17 by mdkhissi         ###   ########.fr       */
+/*   Updated: 2022/07/29 16:09:03 by mdkhissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,20 @@ typedef struct s_tags
 	int			precision;
 }				t_tags;
 
+int		append_text(char **s, const char *format, int *i, int count);
+void	print_s_fd(char **dest, char *s, int fd);
+int		ft_printf(char **dest, int fd, const char *format, ...);
+
 void	sign_0x(char **bigStr, long n, t_tags *tags, int r);
 void	reinit_flags(t_tags *tags);
 char	*extract_var(char *param, va_list *vl, t_tags *tags);
 char	*parse_param(const char *format, int *i, va_list *vl, t_tags *tags);
-int		ft_printf(char **dest, int fd, const char *format, ...);
 
-void	ft_putnstrfree(char **str, int n);
+size_t	ft_strlen(const char *s);
 int		ft_toupper(int c);
-char	*str_capitalize(char *str);
 bool	ft_isdigit(const char c);
+int		ft_putstr_fd(char *s, int fd);
+void	ft_putchar_fd(char c, int fd);
 
 void	s_precision(char **bigStr, t_tags *tags);
 void	s_width(char **bigStr, long n, t_tags *tags);
@@ -75,11 +79,7 @@ char	*format_idu(long n, t_tags *tags);
 
 void	ft_strncpy(char *dest, const char *src, size_t n);
 void	ft_strnallocat(char **dest, const char *src, int n, int r);
-size_t	ft_strlen(const char *s);
 void	*ft_memset(void *s, int c, size_t n);
 int		ft_strchr(const char c, const char *str);
-
-int		ft_putstr_fd(char *s, int fd);
-void	ft_putchar_fd(char c, int fd);
-
+char	*str_capitalize(char *str);;
 #endif

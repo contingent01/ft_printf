@@ -6,11 +6,11 @@
 /*   By: mdkhissi <mdkhissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 19:20:30 by mdkhissi          #+#    #+#             */
-/*   Updated: 2022/07/29 15:44:27 by mdkhissi         ###   ########.fr       */
+/*   Updated: 2022/07/29 15:56:20 by mdkhissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "ft_printf.h"
 
 size_t	ft_strlen(const char *s)
 {

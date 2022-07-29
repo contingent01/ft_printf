@@ -1,6 +1,0 @@
-make --dry-run --keep-going --print-directory
-make: Entering directory '/home/dstof/dev/ft_printf'
-clang -Wall -Wextra -Werror -c srcs/ft_printf.c srcs/ft_core.c srcs/ft_formatters.c srcs/ft_ntoston.c srcs/ft_parsers.c srcs/ft_sutils.c srcs/ft_utils.c -I includes/ft_printf.h
-ar -rcs libftprintf.a ft_printf.o ft_core.o ft_formatters.o ft_ntoston.o ft_parsers.o ft_sutils.o ft_utils.o
-make: Leaving directory '/home/dstof/dev/ft_printf'
- 

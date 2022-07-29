@@ -6,11 +6,11 @@
 /*   By: mdkhissi <mdkhissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 19:17:39 by mdkhissi          #+#    #+#             */
-/*   Updated: 2022/07/29 12:29:53 by mdkhissi         ###   ########.fr       */
+/*   Updated: 2022/07/29 15:55:56 by mdkhissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "ft_printf.h"
 
 int	ft_atoi(const char *str)
 {
