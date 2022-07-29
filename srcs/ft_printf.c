@@ -6,7 +6,7 @@
 /*   By: mdkhissi <mdkhissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 19:19:56 by mdkhissi          #+#    #+#             */
-/*   Updated: 2022/07/29 12:30:03 by mdkhissi         ###   ########.fr       */
+/*   Updated: 2022/07/29 15:44:22 by mdkhissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,16 @@ char	*parse_param(const char *format, int *i, va_list *vl, t_tags *tags)
 	return (param);
 }
 
-int	ft_printf(const char *format, ...)
+int	ft_printf(char **dest, int fd, const char *format, ...)
 {
 	va_list	vl;
 	t_tags	tags;
-	char	*s;
 	int		i;
 	int		count;
+	char	*s;
+	int		from;
 
+	s = NULL;
 	count = 0;
 	i = 0;
 	va_start(vl, format);
@@ -95,15 +97,24 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			reinit_flags(&tags);
-			s = parse_param(format, &i, &vl, &tags);
-			ft_putnstrfree(&s, tags.len);
+			ft_strnallocat(&s, parse_param(format, &i, &vl, &tags), tags.len, 0);
 			count += tags.len;
 		}
 		else
 		{
-			write(1, &format[i++], 1);
-			count++;
+			from = i++;
+			while (format[i] && format[i] != '%')
+				i++;
+			if (i - from > 0)
+				ft_strnallocat(&s, format + from, i - from, 0);
+			count += i - from;
 		}
 	}
+	if (dest)
+		*dest = s;
+	if (fd >= 0)
+		ft_putstr_fd(s, fd);
+	if (!dest && fd == -1)
+		ft_putstr_fd(s, STDOUT_FILENO);
 	return (count);
 }

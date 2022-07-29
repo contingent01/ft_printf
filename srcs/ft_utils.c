@@ -6,39 +6,20 @@
 /*   By: mdkhissi <mdkhissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 19:20:30 by mdkhissi          #+#    #+#             */
-/*   Updated: 2022/07/29 12:30:13 by mdkhissi         ###   ########.fr       */
+/*   Updated: 2022/07/29 15:44:27 by mdkhissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	ft_putnstrfree(char **str, int n)
+size_t	ft_strlen(const char *s)
 {
-	int		i;
-	char	*s;
+	int	l;
 
-	s = *str;
-	i = 0;
-	if (s)
-	{
-		if (n == -1)
-		{
-			while (s[i])
-			{
-				write(1, &(s[i]), 1);
-				i++;
-			}
-		}
-		else
-		{
-			while (i < n)
-			{
-				write(1, &(s[i]), 1);
-				i++;
-			}
-		}
-		free(*str);
-	}
+	l = 0;
+	while (s && s[l] != '\0')
+		l++;
+	return (l);
 }
 
 int	ft_toupper(int c)
@@ -49,23 +30,25 @@ int	ft_toupper(int c)
 		return (c);
 }
 
-char	*str_capitalize(char *str)
+bool	ft_isdigit(const char c)
+{
+	return (c >= '0' && c <= '9');
+}
+
+int	ft_putstr_fd(char *s, int fd)
 {
 	int	i;
 
 	i = 0;
-	if (str)
+	while (s && s[i])
 	{
-		while (str[i])
-		{
-			str[i] = ft_toupper(str[i]);
-			i++;
-		}
+		ft_putchar_fd(s[i], fd);
+		i++;
 	}
-	return (str);
+	return (i);
 }
 
-bool	ft_isdigit(const char c)
+void	ft_putchar_fd(char c, int fd)
 {
-	return (c >= '0' && c <= '9');
+	write(fd, &c, 1);
 }

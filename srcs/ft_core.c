@@ -6,7 +6,7 @@
 /*   By: mdkhissi <mdkhissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 19:15:34 by mdkhissi          #+#    #+#             */
-/*   Updated: 2022/07/29 12:29:45 by mdkhissi         ###   ########.fr       */
+/*   Updated: 2022/07/29 15:44:10 by mdkhissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,6 @@ void	ft_strnallocat(char **dest, const char *src, int n, int r)
 	*dest = result;
 }
 
-size_t	ft_strlen(const char *s)
-{
-	int	l;
-
-	l = 0;
-	while (s && s[l] != '\0')
-		l++;
-	return (l);
-}
-
 void	*ft_memset(void *s, int c, size_t n)
 {
 	unsigned char	*ptr;
@@ -112,4 +102,20 @@ int	ft_strchr(const char c, const char *str)
 		i++;
 	}
 	return (-1);
+}
+
+char	*str_capitalize(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str)
+	{
+		while (str[i])
+		{
+			str[i] = ft_toupper(str[i]);
+			i++;
+		}
+	}
+	return (str);
 }

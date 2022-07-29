@@ -6,7 +6,7 @@
 /*   By: mdkhissi <mdkhissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 19:23:31 by mdkhissi          #+#    #+#             */
-/*   Updated: 2022/07/29 12:30:17 by mdkhissi         ###   ########.fr       */
+/*   Updated: 2022/07/29 14:57:17 by mdkhissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	sign_0x(char **bigStr, long n, t_tags *tags, int r);
 void	reinit_flags(t_tags *tags);
 char	*extract_var(char *param, va_list *vl, t_tags *tags);
 char	*parse_param(const char *format, int *i, va_list *vl, t_tags *tags);
-int		ft_printf(const char *format, ...);
+int		ft_printf(char **dest, int fd, const char *format, ...);
 
 void	ft_putnstrfree(char **str, int n);
 int		ft_toupper(int c);
@@ -78,5 +78,8 @@ void	ft_strnallocat(char **dest, const char *src, int n, int r);
 size_t	ft_strlen(const char *s);
 void	*ft_memset(void *s, int c, size_t n);
 int		ft_strchr(const char c, const char *str);
+
+int		ft_putstr_fd(char *s, int fd);
+void	ft_putchar_fd(char c, int fd);
 
 #endif
